@@ -33,23 +33,33 @@ val baseSettings = Seq(
 
     resolvers ++= commonResolvers,
 
-    ivyScala := ivyScala.value.map {_.copy(overrideScalaVersion = true)},
-
     fork in run := true,
+    fork in test := true,
+   
+    parallelExecution in test := false,
 
-  libraryDependencies ++= { sparkEnv.value match {
-    case SparkEnv.CDH => cdhProvidedDeps map ( _ % "provided")
-    case SparkEnv.OPENSOURCE => providedDeps map ( _ % "provided")
-  }}
+    libraryDependencies ++= {
+     sparkEnv.value match {
+       case SparkEnv.CDH =>
+         cdhDependencies()
 
+       case SparkEnv.OPENSOURCE =>
+         openSourceDependencies()
+
+     }
+   }
   )
-/*
-  val osSettings = inConfig(OS)(baseSettings) ++ Seq(
-    libraryDependencies in OS ++= providedDeps map (_ % "provided")
-  )
 
-  val cdhSettings = inConfig(CDH)(Seq(
-    libraryDependencies in CDH ++= cdhProvidedDeps map (_ % "compile -> cdh")
-  ))
-*/
+  def cdhDependencies() = {
+    val provided = CDHDependencies.analyticsProvidedDeps map ( _ % "provided" )
+    val test = CDHDependencies.analyticsTestDeps map ( _ % "test" )
+    provided ++ test ++ CDHDependencies.analyticOtherDeps
+  }
+
+  def openSourceDependencies() = {
+    val provided = Dependencies.analyticsProvidedDeps map ( _ % "provided" )
+    val test = Dependencies.analyticsTestDeps map ( _ % "test" )
+    provided ++ test ++ Dependencies.analyticsOtherDeps
+  }
+
 }
