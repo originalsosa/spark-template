@@ -33,6 +33,7 @@ object Library {
   val slf4j             =     "org.slf4j" % "slf4j-api" % Version.Slf4J
   val logback           =     "ch.qos.logback" % "logback-classic" % Version.Logback
 
+  val jodaConvert       =     "org.joda" % "joda-convert" % "1.8.1"
   val typesafeConfig    =     "com.typesafe" % "config" % Version.TypesafeConfig
 }
 
@@ -51,12 +52,12 @@ object Dependencies {
 
   val commonResolvers = Resolvers.resolvers
 
-  val commonTestDeps = Seq(scalactic, scalatest)
+  val commonTestDeps = Seq(scalactic, scalaTest)
 
-  val analyticsProviderDeps = 
+  val analyticsProvidedDeps = 
     Seq(sparkCore, sparkSql, sparkHive,
         hadoopYarnAPI, hadoopYarnClient, hadoopYarnCommon, hadoopYarnApps, hadoopYarnServer, hadoopClient,
-        slf4j, logBack, typesafeConfig)
+        slf4j, logback, typesafeConfig)
 
   val analyticsOtherDeps = Seq( jodaConvert )
 

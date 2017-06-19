@@ -4,9 +4,9 @@ import CDHLibrary._
 object CDHVersion {
   final val Scala     = "2.11.8"
   final val ScalaTest = "3.0.1"
-  final val Spark       = "2.1.0-cdh5.11.1"
+  final val Spark       = "2.1.0.cloudera1"
   final val SparkTesting = "2.1.0_0.6.0"
-  final val Hadoop    = "2.6.0-cdh5.11.1"
+  final val Hadoop    = "2.6.0-cdh5.11.0"
   final val TypesafeConfig = "1.3.1"
   final val Logback   = "1.2.3"
   final val Slf4J     = "1.7.24"
@@ -33,6 +33,7 @@ object CDHLibrary {
   val slf4j             =     "org.slf4j" % "slf4j-api" % CDHVersion.Slf4J
   val logback           =     "ch.qos.logback" % "logback-classic" % CDHVersion.Logback
 
+  val jodaConvert       =     "org.joda" % "joda-convert" % "1.8.1"
   val typesafeConfig    =     "com.typesafe" % "config" % CDHVersion.TypesafeConfig
 }
 /*
@@ -51,12 +52,12 @@ object CDHDependencies {
 
   val commonResolvers = Resolvers.resolvers
 
-  val commonTestDeps = Seq(scalactic, scalatest)
+  val commonTestDeps = Seq(scalactic, scalaTest)
 
-  val analyticsProviderDeps = 
+  val analyticsProvidedDeps = 
     Seq(sparkCore, sparkSql, sparkHive,
         hadoopYarnAPI, hadoopYarnClient, hadoopYarnCommon, hadoopYarnApps, hadoopYarnServer, hadoopClient,
-        slf4j, logBack, typesafeConfig)
+        slf4j, logback, typesafeConfig)
 
   val analyticsOtherDeps = Seq( jodaConvert )
 

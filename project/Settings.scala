@@ -53,7 +53,7 @@ val baseSettings = Seq(
   def cdhDependencies() = {
     val provided = CDHDependencies.analyticsProvidedDeps map ( _ % "provided" )
     val test = CDHDependencies.analyticsTestDeps map ( _ % "test" )
-    provided ++ test ++ CDHDependencies.analyticOtherDeps
+    provided ++ test ++ CDHDependencies.analyticsOtherDeps
   }
 
   def openSourceDependencies() = {
